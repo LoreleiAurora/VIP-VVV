@@ -66,15 +66,8 @@ plugins=(
 	debug-bar
 	vip-scanner
 )
-if ! $(noroot wp core is-installed --allow-root); then
-	echo "Installing VIP..."
-	noroot wp core multisite-install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
-	#noroot wp core install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
-	echo "Installing VIP default themes..."
-	# we don't need to activate this as it's activated on install, although it isn't included, hence the install
-	noroot wp theme install twentyseventeen
-	echo "Installing VIP default plugins..."
 
+function update_plugins {
 	for i in ${plugins[@]}; do
   		if ! $(noroot wp plugin is-installed ${i}); then
   			echo "Installing plugin: ${i}"
@@ -84,6 +77,18 @@ if ! $(noroot wp core is-installed --allow-root); then
   			noroot wp plugin update ${i}
   		fi
 	done
+}
+
+if ! $(noroot wp core is-installed --allow-root); then
+	echo "Installing VIP..."
+	noroot wp core multisite-install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
+	#noroot wp core install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
+	echo "Installing VIP default themes..."
+	# we don't need to activate this as it's activated on install, although it isn't included, hence the install
+	noroot wp theme install twentyseventeen
+	echo "Installing VIP default plugins..."
+
+	update_plugins
 
 	echo "Installing VIP Shared Plugins..."
 	mkdir -p ${VVV_PATH_TO_SITE}/wp-content/themes/vip/plugins/
@@ -102,15 +107,7 @@ else
 	echo "Updating VIP default themes"
 	noroot wp theme update twentyseventeen
 
-	for i in ${plugins[@]}; do
-  		if ! $(noroot wp plugin is-installed ${i}); then
-  			echo "Installing plugin: ${i}"
-  			noroot wp plugin install ${i} --activate-network
-  		else
-  			echo "Updating plugin: ${i}"
-  			noroot wp plugin update ${i}
-  		fi
-	done
+	update_plugins
 
 	echo "Updating VIP Shared plugins..."
 	svn up ${VVV_PATH_TO_SITE}/wp-content/themes/vip/plugins/
