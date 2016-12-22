@@ -100,7 +100,7 @@ else
 	echo "Updating VIP..."
 	noroot wp core update
 	echo "Updating VIP default themes"
-	noroot wp theme update twenty-seventeen
+	noroot wp theme update twentyseventeen
 
 	for i in ${plugins[@]}; do
   		if ! $(noroot wp plugin is-installed ${i}); then
