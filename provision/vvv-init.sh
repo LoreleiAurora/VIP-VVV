@@ -31,13 +31,12 @@ define( 'WP_DEBUG', true );
 PHP
 fi
 
-if ! $(wp core is-installed --allow-root); then
+if ! $(noroot wp core is-installed --allow-root); then
   echo "Installing VIP..."
-  noroot wp core install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password" --allow-root
-
+  noroot wp core install --url=vip.localhost --quiet --title="VIP" --admin_name=admin --admin_email="admin@local.dev" --admin_password="password"
+  noroot wp theme install twenty-seventeen --activate
 else
-
   echo "Updating VIP..."
-  noroot wp core update --allow-root
-
+  noroot wp core update
+  noroot wp theme update twenty-seventeen
 fi
