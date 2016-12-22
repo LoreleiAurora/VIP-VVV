@@ -55,7 +55,6 @@ PHP
 fi
 
 plugins=(
-	batcache
 	query-monitor
 	debug-bar
 	vip-scanner
