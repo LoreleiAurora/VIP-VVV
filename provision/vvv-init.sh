@@ -55,8 +55,8 @@ define( 'KEYRING__HEADLESS_MODE', true );
 define( 'WP_MEMORY_LIMIT', '64M' );
 define( 'WP_MAX_MEMORY_LIMIT', '256M' );
 
-require '../config/roles.php';
-require '../config/vip-config.php';
+require __DIR__.'/../config/roles.php';
+require __DIR__.'/../config/vip-config.php';
 
 PHP
 fi
