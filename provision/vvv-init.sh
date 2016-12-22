@@ -48,9 +48,9 @@ if ( ! defined( 'JETPACK_DEV_DEBUG' ) ) {
 // Put Keyring into headless mode
 define( 'KEYRING__HEADLESS_MODE', true );
 
-if ( ! defined( 'DOMAIN_CURRENT_SITE' ) ) {
-	define( 'DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST'] );
-}
+//if ( ! defined( 'DOMAIN_CURRENT_SITE' ) ) {
+//	define( 'DOMAIN_CURRENT_SITE', \$_SERVER['HTTP_HOST'] );
+//}
 
 define( 'WP_MEMORY_LIMIT', '64M' );
 define( 'WP_MAX_MEMORY_LIMIT', '256M' );
