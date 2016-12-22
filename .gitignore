@@ -1,3 +1,4 @@
 /log/
 /wordpress/
 .DS_Store
+/wp-content/db.php
